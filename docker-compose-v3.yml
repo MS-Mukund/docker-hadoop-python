@@ -2,7 +2,7 @@ version: '3'
 
 services:
   namenode:
-    image: bde2020/hadoop-namenode:hadoop3.2.4-python
+    image: exclowd/hadoop-python-namenode:ubuntu-20.04
     networks:
       - hbase
     volumes:
@@ -24,7 +24,7 @@ services:
         traefik.port: 50070
 
   datanode:
-    image: bde2020/hadoop-datanode:hadoop3.2.4-python
+    image: exclowd/hadoop-python-datanode:ubuntu-20.04
     networks:
       - hbase
     volumes:
@@ -42,7 +42,7 @@ services:
         traefik.port: 50075
 
   resourcemanager:
-    image: bde2020/hadoop-resourcemanager:hadoop3.2.4-python
+    image: exclowd/hadoop-python-resourcemanager:ubuntu-20.04
     networks:
       - hbase
     environment:
@@ -64,7 +64,7 @@ services:
       disable: true
 
   nodemanager:
-    image: bde2020/hadoop-nodemanager:hadoop3.2.4-python
+    image: exclowd/hadoop-python-nodemanager:ubuntu-20.04
     networks:
       - hbase
     environment:
@@ -80,7 +80,7 @@ services:
         traefik.port: 8042
 
   historyserver:
-    image: bde2020/hadoop-historyserver:hadoop3.2.4-python
+    image: exclowd/hadoop-python-historyserver:ubuntu-20.04
     networks:
       - hbase
     volumes:

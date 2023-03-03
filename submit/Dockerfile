@@ -1,6 +1,4 @@
-FROM bde2020/hadoop-base:hadoop3.2.4-python
-
-MAINTAINER Ivan Ermilov <ivan.s.ermilov@gmail.com>
+FROM exclowd/hadoop-python-base:ubuntu-20.04
 
 COPY WordCount.jar /opt/hadoop/applications/WordCount.jar
 

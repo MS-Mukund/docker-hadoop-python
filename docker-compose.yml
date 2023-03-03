@@ -2,7 +2,7 @@ version: "3"
 
 services:
   namenode:
-    image: bde2020/hadoop-namenode:hadoop3.2.4-python
+    image: exclowd/hadoop-python-namenode:ubuntu-20.04
     container_name: namenode
     restart: always
     ports:
@@ -14,9 +14,11 @@ services:
       - CLUSTER_NAME=test
     env_file:
       - ./hadoop.env
+    networks:
+      - hadoop_network
 
   datanode:
-    image: bde2020/hadoop-datanode:hadoop3.2.4-python
+    image: exclowd/hadoop-python-datanode:ubuntu-20.04
     container_name: datanode
     restart: always
     volumes:
@@ -25,27 +27,33 @@ services:
       SERVICE_PRECONDITION: "namenode:9870"
     env_file:
       - ./hadoop.env
+    networks:
+      - hadoop_network
 
   resourcemanager:
-    image: bde2020/hadoop-resourcemanager:hadoop3.2.4-python
+    image: exclowd/hadoop-python-resourcemanager:ubuntu-20.04
     container_name: resourcemanager
     restart: always
     environment:
       SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode:9864"
     env_file:
       - ./hadoop.env
+    networks:
+      - hadoop_network
 
   nodemanager1:
-    image: bde2020/hadoop-nodemanager:hadoop3.2.4-python
+    image: exclowd/hadoop-python-nodemanager:ubuntu-20.04
     container_name: nodemanager
     restart: always
     environment:
       SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode:9864 resourcemanager:8088"
     env_file:
       - ./hadoop.env
+    networks:
+      - hadoop_network
 
   historyserver:
-    image: bde2020/hadoop-historyserver:hadoop3.2.4-python
+    image: exclowd/hadoop-python-historyserver:ubuntu-20.04
     container_name: historyserver
     restart: always
     environment:
@@ -54,8 +62,13 @@ services:
       - hadoop_historyserver:/hadoop/yarn/timeline
     env_file:
       - ./hadoop.env
+    networks:
+      - hadoop_network
 
 volumes:
   hadoop_namenode:
   hadoop_datanode:
   hadoop_historyserver:
+
+networks:
+  hadoop_network:
