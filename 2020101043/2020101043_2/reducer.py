@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """reducer.py"""
 
-from operator import itemgetter
 import sys
 
 first_arr = []
